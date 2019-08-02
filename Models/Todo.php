@@ -3,6 +3,8 @@
 require_once('config/dbconnect.php');
 
 //todo
+//1つのクラスに、一つの役割がある
+//tasksテーブルとのやりとりをする
 class Todo
 {   //プロパティー
     private $table = 'tasks';
@@ -29,5 +31,32 @@ class Todo
         //prepareメソッドを実行
         $stmt = $this->db_manager->dbh->prepare('INSERT INTO ' . $this->table . ' (name) VALUES (?)');
         $stmt->execute([$name]);
+    }
+    //dbからデータを全て取得するメソッド
+    public function getAll()
+    {
+        //return === 関数の呼び出し元に、値に返す
+        //実行するsql文を準備
+        //$this === このクラスのインスタンス
+        //db_manager
+            //このクラスのインスタンスのプロパティ
+            //DbManagerクラスのインスタンス
+        //dbh
+            //db_managerのプロパティ
+        //prepare
+            //dbhのメソッド 
+            //PDOインスタンスの、メソッド
+            //()がついていつのがメソッド
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table);
+
+        //準備したsqlを実行する
+        //$dbh ===PDoクラスのインスタンス
+        
+
+        $stmt->execute();
+        //実行結果を取得
+        $tasks = $stmt->fetchAll();
+        //return===関数の呼び出し元に、値を返す
+        return $tasks;
     }
 }
