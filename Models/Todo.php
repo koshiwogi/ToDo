@@ -59,4 +59,27 @@ class Todo
         //return===関数の呼び出し元に、値を返す
         return $tasks;
     }
+
+    public function get($id)
+    {
+        //$idと一致するidをもつレコードを取得する
+
+        //準備する
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table . ' WHERE id = ?');
+        //実行する
+        //[0 => 1]
+        $stmt->execute([$id]);
+       
+        //実行結果を変数に代入する
+        $task = $stmt->fetch();
+
+        //結果を関数の呼び出し元に返す
+        return $task;
+    }
+
+    public function update($id,$name){
+        $stmt = $this->db_manager->dbh->prepare('UPDATE ' . $this->table . ' SET name = ? WHERE id = ?');
+        $stmt->execute([$name,$id]);
+
+    }
 }
