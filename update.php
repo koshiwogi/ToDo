@@ -6,12 +6,14 @@ require_once('Models/Todo.php');
 
 //データの受け取り
 //id,task
-$id = $_POST[”id”];
-$task_name = $_POST[”task”];
+$id = $_POST['id'];
+$task_name = $_POST['task'];
 
 //更新
 //todoクラスのインスタンスを$todoに代入
 $todo = new Todo();
+
+
 
 //Todoクラスのupdateメソッドを実行
  $todo->update($id,$task_name);
